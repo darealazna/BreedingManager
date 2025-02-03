@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Cattle extends AbstractEntity {
 
     private String number;
-    private boolean gender;
+    private boolean gender; //true = female
     private LocalDate dateOfBirth;
 
 }
