@@ -12,6 +12,14 @@ public class Cattle extends AbstractEntity {
 
     private String number;
     private boolean gender; //true = female
+    public boolean isGender() { // Naming convention for boolean getters
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
     private LocalDate dateOfBirth;
 
 }

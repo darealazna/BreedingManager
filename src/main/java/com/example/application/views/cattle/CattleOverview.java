@@ -24,14 +24,18 @@ import org.vaadin.lineawesome.LineAwesomeIconUrl;
 public class CattleOverview extends VerticalLayout {
 
 public CattleOverview(CattleRepo cattleRepo){
-    Grid<Cattle> grid = new Grid<>(Cattle.class, true);
+    Grid<Cattle> grid = new Grid<>(Cattle.class, false);
+            grid.addColumn("number").setHeader("Cattle Number");
+            grid.addColumn("dateOfBirth").setHeader("DateOfBirth");
+            grid.addColumn(cattle->Boolean.TRUE.equals(cattle.isGender()) ? "Male" : "Female")
+                    .setHeader("Gender");
     Button addButton = new Button("Add",l-> {
         Dialog dialog = new Dialog();
 
-        dialog.setHeaderTitle("New employee");
-
+        dialog.setHeaderTitle("New cattle");
 
         //dialog.add(dialogLayout);
+
 
         Button saveButton = new Button("Save");
         Button cancelButton = new Button("Cancel", e -> dialog.close());
@@ -39,17 +43,45 @@ public CattleOverview(CattleRepo cattleRepo){
         dialog.getFooter().add(saveButton);
         dialog.open();
 
+
         ComboBox<Boolean> comboBox = new ComboBox<>("Gender");
         comboBox.setItems(true,false);
         comboBox.setItemLabelGenerator(g->g?"male":"female");
         dialog.add(comboBox);
     });
     addButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-    Button editButton = new Button("Edit");
+    Button editButton = new Button("Edit", l -> {
+        Dialog editButtonDialog = new Dialog();
+
+        editButtonDialog.setHeaderTitle("Edit cattle");
+
+        Button saveButton = new Button("Save");
+        Button cancelButton = new Button("Cancel", e -> editButtonDialog.close());
+        editButtonDialog.getFooter().add(cancelButton);
+        editButtonDialog.getFooter().add(saveButton);
+        editButtonDialog.open();
+    });
     editButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+    editButton.setEnabled(false);
+    grid.asSingleSelect().addValueChangeListener(event -> {
+        // Enable the button if a row is selected, otherwise disable it
+        editButton.setEnabled(event.getValue() != null);
+    });
     Button removeButton = new Button("Remove");
     removeButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-    HorizontalLayout layout = new HorizontalLayout(addButton,editButton,removeButton);
+    removeButton.setEnabled(false);
+    grid.asSingleSelect().addValueChangeListener(event -> {
+        // Enable the button if a row is selected, otherwise disable it
+        removeButton.setEnabled(event.getValue() != null);
+    });
+    Button cullButton = new Button("Cull");
+    cullButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+    cullButton.setEnabled(false);
+    grid.asSingleSelect().addValueChangeListener(event -> {
+        // Enable the button if a row is selected, otherwise disable it
+        cullButton.setEnabled(event.getValue() != null);
+    });
+    HorizontalLayout layout = new HorizontalLayout(addButton,editButton,removeButton,cullButton);
 grid.setItems(cattleRepo.findAll());
     add(layout);
     add(grid);
