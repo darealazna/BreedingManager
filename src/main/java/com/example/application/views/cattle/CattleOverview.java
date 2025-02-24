@@ -14,11 +14,13 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import org.vaadin.lineawesome.LineAwesomeIconUrl;
 
 @PageTitle("Говеда")
 @Route("cattle")
+@RouteAlias("")
 @Menu(order = 4, icon = LineAwesomeIconUrl.GLOBE_SOLID)
 @AnonymousAllowed
 public class CattleOverview extends VerticalLayout {
