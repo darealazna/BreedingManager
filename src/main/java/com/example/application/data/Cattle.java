@@ -17,7 +17,7 @@ public class Cattle extends AbstractEntity {
     private boolean gender; //true = female
     @OneToMany
     private List<Reproduction> reproductionList;
-
+    private LocalDate dateOfBirth;
     public boolean isGender() { // Naming convention for boolean getters
         return gender;
     }
@@ -26,6 +26,6 @@ public class Cattle extends AbstractEntity {
         this.gender = gender;
     }
 
-    private LocalDate dateOfBirth;
+
 
 }

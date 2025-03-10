@@ -32,36 +32,15 @@ public CattleOverview(CattleRepo cattleRepo){
             grid.addColumn(cattle->Boolean.TRUE.equals(cattle.isGender()) ? "Male" : "Female")
                     .setHeader("Gender");
     Button addButton = new Button("Add",l-> {
-        Dialog dialog = new Dialog();
-
-        dialog.setHeaderTitle("New cattle");
-
-        //dialog.add(dialogLayout);
-
-
-        Button saveButton = new Button("Save");
-        Button cancelButton = new Button("Cancel", e -> dialog.close());
-        dialog.getFooter().add(cancelButton);
-        dialog.getFooter().add(saveButton);
+        CattleDialog dialog = new CattleDialog(new Cattle(),cattleRepo);
         dialog.open();
-
-
-        ComboBox<Boolean> comboBox = new ComboBox<>("Gender");
-        comboBox.setItems(true,false);
-        comboBox.setItemLabelGenerator(g->g?"male":"female");
-        dialog.add(comboBox);
     });
     addButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
     Button editButton = new Button("Edit", l -> {
-        Dialog editButtonDialog = new Dialog();
-
-        editButtonDialog.setHeaderTitle("Edit cattle");
-
-        Button saveButton = new Button("Save");
-        Button cancelButton = new Button("Cancel", e -> editButtonDialog.close());
-        editButtonDialog.getFooter().add(cancelButton);
-        editButtonDialog.getFooter().add(saveButton);
-        editButtonDialog.open();
+        Cattle cattle = grid.asSingleSelect().getValue();
+        CattleDialog dialog = new CattleDialog(cattle,cattleRepo);
+        dialog.open();
     });
     editButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
     editButton.setEnabled(false);
