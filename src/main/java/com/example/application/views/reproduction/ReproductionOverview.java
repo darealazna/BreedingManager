@@ -1,8 +1,7 @@
-package com.example.application.views.cattle;
+package com.example.application.views.reproduction;
 
 
 import com.example.application.data.Cattle;
-import com.example.application.data.Herd;
 import com.example.application.data.Reproduction;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

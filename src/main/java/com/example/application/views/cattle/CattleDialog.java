@@ -2,7 +2,6 @@ package com.example.application.views.cattle;
 
 import com.example.application.data.Cattle;
 import com.example.application.data.CattleRepo;
-import com.helger.css.decl.ICSSTopLevelRule;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
